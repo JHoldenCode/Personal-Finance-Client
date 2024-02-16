@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const PostHoldingsButton = () => {
+const PostHoldingsButton = (props) => {
   const [postData, setPostData] = useState({
     ticker: '',
     stockPrice: '',
@@ -36,6 +36,9 @@ const PostHoldingsButton = () => {
 
       // Make the POST request using axios
       const response = await axios.post('http://localhost:5000/holdings', postArgs);
+
+      // reloads the table data after a successful post request
+      props.refetchTableData();
 
       // Handle the response if needed
       console.log('Response:', response.data);

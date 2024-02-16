@@ -2,14 +2,26 @@ import React, { useState, useEffect } from 'react';
 import './holdings.css';
 import axios from 'axios';
 import PostHoldingsButton from '../postHoldingsButton/postHoldingsButton';
+import DeleteHoldingsButton from '../deleteHoldingsButton/deleteHoldingsButton';
 
 const holdingsEndpoint = "http://localhost:5000/holdings";
 
 function Holdings() {
   const [tableData, setTableData] = useState([]);
   const [compiledData, setCompiledData] = useState([]);
+  const [selectedRows, setSelectedRows] = useState([]);
 
-  useEffect(() => {
+  const handleCheckboxChange = (ticker) => {
+    setSelectedRows((prevSelectedRows) => {
+      if (prevSelectedRows.includes(ticker)) {
+        return prevSelectedRows.filter((selectedTicker) => selectedTicker !== ticker);
+      } else {
+        return [...prevSelectedRows, ticker];
+      }
+    });
+  };
+
+  const fetchTableData = async () => {
     axios.get(holdingsEndpoint)
       .then((response) => {
         let holdingsData = response.data.holdings;
@@ -28,6 +40,10 @@ function Holdings() {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  useEffect(() => {
+    fetchTableData();
   }, []); // Empty dependency array to run the effect only once when the component mounts
 
   return (
@@ -50,6 +66,7 @@ function Holdings() {
         <table>
           <thead>
             <tr>
+              <th>X</th>
               <th>Stock</th>
               <th>Equity</th>
               <th>Stock Price</th>
@@ -62,6 +79,13 @@ function Holdings() {
           <tbody>
             {tableData.map((val, key) => (
               <tr key={key}>
+                <td>
+                    <input
+                    type="checkbox"
+                    checked={selectedRows.includes(val.ticker)}
+                    onChange={() => handleCheckboxChange(val.ticker)}
+                    />
+                </td>
                 <td>{val.ticker}</td>
                 <td>{val.equity}</td>
                 <td>{val.price}</td>
@@ -75,10 +99,21 @@ function Holdings() {
         </table>
       </div>
       <div className='post-new-holding'>
-        <PostHoldingsButton />
+        <PostHoldingsButton 
+            refetchTableData={fetchTableData}
+        />
+      </div>
+      <div className='delete-holdings'>
+        <DeleteHoldingsButton 
+            selectedTickers={selectedRows}
+            refetchTableData={fetchTableData}
+        />
       </div>
     </div>
   );
 }
+
+// TODO - add prettier and linting in CI?
+// TODO - fix rounding on compiled stats
 
 export default Holdings;

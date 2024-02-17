@@ -7,6 +7,8 @@ import ClearAllHoldingsButton from '../clearAllHoldingsButton/clearAllHoldingsBu
 
 const holdingsEndpoint = "http://localhost:5000/holdings";
 
+// TODO - reset selectedRows when items deleted
+
 function Holdings() {
   const [tableData, setTableData] = useState([]);
   const [compiledData, setCompiledData] = useState([]);

@@ -1,11 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PostPurchasesButton from '../postPurchasesButton/postPurchasesButton';
+import DeletePurchasesButton from '../deletePurchasesButton/deletePurchasesButton';
+import ClearAllPurchasesButton from '../clearAllPurchasesButton/clearAllPurchasesButton';
 
 const moneySpentEndpoint = "http://localhost:5000/money_spent/all_purchases";
 
+// TODO - reset selectedRows when items deleted
+// TODO - add id for purchases instead of using row index
+
 function Purchases() {
     const [tableData, setTableData] = useState([]);
+    const [selectedRows, setSelectedRows] = useState([]);
+
+    const handleCheckboxChange = (rowKey) => {
+        setSelectedRows((prevSelectedRows) => {
+            if (prevSelectedRows.includes(rowKey)) {
+                return prevSelectedRows.filter((selectedRow) => selectedRow !== rowKey);
+            } else {
+                return [...prevSelectedRows, rowKey];
+            }
+        });
+    }
+
+    const resetSelectedRows = () => {
+        setSelectedRows([]);
+    };
 
     const fetchTableData = async () => {
         axios.get(moneySpentEndpoint)
@@ -60,7 +80,8 @@ function Purchases() {
                                 <td>
                                     <input 
                                     type="checkbox"
-                                    checked={false}
+                                    checked={selectedRows.includes(key)}
+                                    onChange={() => handleCheckboxChange(key)}
                                     />
                                 </td>
                                 <td>{val.date}</td>
@@ -75,6 +96,20 @@ function Purchases() {
             <div className='post-purchases-button'>
                 <PostPurchasesButton 
                     refetchTableData={fetchTableData}
+                />
+            </div>
+            <div className='delete-purchases-button'>
+                <DeletePurchasesButton
+                    tableData={tableData}
+                    selectedRows={selectedRows}
+                    refetchTableData={fetchTableData}
+                    resetSelectedRows={resetSelectedRows}
+                />
+            </div>
+            <div className='clear-all-purchases'>
+                <ClearAllPurchasesButton 
+                    refetchTableData={fetchTableData}
+                    resetSelectedRows={resetSelectedRows}
                 />
             </div>
         </div>

@@ -10,7 +10,6 @@ const DeleteHoldingsButton = (props) => {
             };
 
             // make the DELETE request using axios
-            // const response = await axios.delete('http://localhost:5000/holdings', deleteArgs);
             const response = await axios.delete('http://localhost:5000/holdings', {
                 data: deleteArgs,
                 headers: {

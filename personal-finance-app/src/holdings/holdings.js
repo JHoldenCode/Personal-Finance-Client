@@ -3,6 +3,7 @@ import './holdings.css';
 import axios from 'axios';
 import PostHoldingsButton from '../postHoldingsButton/postHoldingsButton';
 import DeleteHoldingsButton from '../deleteHoldingsButton/deleteHoldingsButton';
+import ClearAllHoldingsButton from '../clearAllHoldingsButton/clearAllHoldingsButton';
 
 const holdingsEndpoint = "http://localhost:5000/holdings";
 
@@ -109,11 +110,17 @@ function Holdings() {
             refetchTableData={fetchTableData}
         />
       </div>
+      <div className='clear-all-holdings'>
+        <ClearAllHoldingsButton 
+          refetchTableData={fetchTableData}
+        />
+      </div>
     </div>
   );
 }
 
 // TODO - add prettier and linting in CI?
 // TODO - fix rounding on compiled stats
+// TODO - sometimes new holdings added already checked?
 
 export default Holdings;

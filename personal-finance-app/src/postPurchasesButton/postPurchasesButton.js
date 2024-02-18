@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const postPurchasesEndpoint = "http://localhost:5000/money_spent";
+
 const PostPurchasesButton = (props) => {
     const [postData, setPostData] = useState({
         date: '',
@@ -39,10 +41,8 @@ const PostPurchasesButton = (props) => {
                 }
             };
 
-            console.log(postArgs);
-
             // make the POST request using axios
-            const response = await axios.post("http://localhost:5000/money_spent", postArgs);
+            const response = await axios.post(postPurchasesEndpoint, postArgs);
 
             // reloads the table data after a successful POST request
             props.refetchTableData();

@@ -1,16 +1,21 @@
 import React from 'react';
 import axios from 'axios';
 
-const createDeleteJSONArg = (tableData, selectedRows) => {
-    selectedRows.sort();
+const deletePurchasesEndpoint = "http://localhost:5000/money_spent";
+
+// creates the object used as an argument to the DELETE request
+const createDeleteRequestObj = (tableData, selectedRows) => {
+    // dictionary to cache the start row of purchase dates
     let startRowOfDateDict = {};
+
+    // object that will be constructed and returned
     let deleteArgs = {
         purchases: {}
     };
 
-    // loop through selected rows and add appropriate data to delete arguments
-    for (let index in selectedRows) {
-        let row = selectedRows[index];
+    // add the index of each purchase to deleteArgs (only in reference to other purchases made on same date)
+    for (let i = 0; i < selectedRows.length; i++) {
+        let row = selectedRows[i];
         let rowData = tableData[row];
         let rowDate = rowData.date;
         
@@ -25,8 +30,7 @@ const createDeleteJSONArg = (tableData, selectedRows) => {
 
         let startRow = startRowOfDateDict[rowDate];
 
-        // add the index of the purchase to delete if only purchases from
-        // that date were considered
+        // add modified index of purchase to array of purchases to delete on that date
         if (rowDate in deleteArgs.purchases) {
             deleteArgs.purchases[rowDate].push(row - startRow);
         } else {
@@ -41,17 +45,16 @@ const DeletePurchasesButton = (props) => {
     const handleButtonClick = async () => {
         try {
             // create JSON obj for delete request
-            let deleteArgs = createDeleteJSONArg(props.tableData, props.selectedRows);
+            let deleteArgs = createDeleteRequestObj(props.tableData, props.selectedRows);
 
             // make the DELETE request using axios
-            const response = await axios.delete('http://localhost:5000/money_spent', {
+            const response = await axios.delete(deletePurchasesEndpoint, {
                 data: deleteArgs,
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
 
-            // refetch the table data after a successful delete request
             props.resetSelectedRows();
             props.refetchTableData();
 

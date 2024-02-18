@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import './holdings.css';
 import axios from 'axios';
 import PostHoldingsButton from '../postHoldingsButton/postHoldingsButton';
 import DeleteHoldingsButton from '../deleteHoldingsButton/deleteHoldingsButton';
 import ClearAllHoldingsButton from '../clearAllHoldingsButton/clearAllHoldingsButton';
+import './holdings.css';
 
 const holdingsEndpoint = "http://localhost:5000/holdings";
-
-// TODO - reset selectedRows when items deleted
 
 function Holdings() {
   const [tableData, setTableData] = useState([]);
   const [compiledData, setCompiledData] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
 
+  // removes or adds a row index to selectedRows
   const handleCheckboxChange = (ticker) => {
     setSelectedRows((prevSelectedRows) => {
       if (prevSelectedRows.includes(ticker)) {
@@ -30,7 +29,7 @@ function Holdings() {
         let holdingsData = response.data.holdings;
         let newData = [];
 
-        // add the ticker for reach stock as a field in the object and push to tableData
+        // add the ticker for reach stock as a field in the object and push to newData
         for (let stockTicker in holdingsData) {
           let holdingsObj = holdingsData[stockTicker];
           holdingsObj.ticker = stockTicker;
@@ -123,6 +122,6 @@ function Holdings() {
 
 // TODO - add prettier and linting in CI?
 // TODO - fix rounding on compiled stats
-// TODO - sometimes new holdings added already checked?
+// TODO - minify code
 
 export default Holdings;

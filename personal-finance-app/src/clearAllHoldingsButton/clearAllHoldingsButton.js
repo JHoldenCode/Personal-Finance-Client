@@ -1,14 +1,15 @@
 import React from 'react';
-import './clearAllHoldingsButton.css';
 import axios from 'axios';
+
+const clearAllHoldingsEndpoint = "http://localhost:5000/holdings/clear_all";
 
 const ClearAllHoldingsButton = (props) => {
     const handleButtonClick = async () => {
         // make the delete request using axios
-        axios.delete("http://localhost:5000/holdings/clear_all")
+        axios.delete(clearAllHoldingsEndpoint)
             .then((response) => {
                 props.refetchTableData();
-                console.log("Response: " + response);
+                console.log("Response: ", response);
             })
             .catch((error) => {
                 console.log(error);

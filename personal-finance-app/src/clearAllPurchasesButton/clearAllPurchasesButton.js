@@ -1,10 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 
+const clearAllPurchasesEndpoint = "http://localhost:5000/money_spent/clear_all";
+
 const ClearAllPurchasesButton = (props) => {
     const handleButtonClick = async () => {
         // make the DELETE request using axios
-        axios.delete("http://localhost:5000/money_spent/clear_all")
+        axios.delete(clearAllPurchasesEndpoint)
             .then((response) => {
                 props.resetSelectedRows();
                 props.refetchTableData();
@@ -20,7 +22,5 @@ const ClearAllPurchasesButton = (props) => {
         </div>
     )
 };
-
-// TODO - minify code
 
 export default ClearAllPurchasesButton;

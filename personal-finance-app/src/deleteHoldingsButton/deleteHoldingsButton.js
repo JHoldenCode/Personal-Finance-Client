@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
+const deleteHoldingsEndpoint = "http://localhost:5000/holdings";
+
 const DeleteHoldingsButton = (props) => {
     const handleButtonClick = async () => {
         try {
@@ -10,7 +12,7 @@ const DeleteHoldingsButton = (props) => {
             };
 
             // make the DELETE request using axios
-            const response = await axios.delete('http://localhost:5000/holdings', {
+            const response = await axios.delete(deleteHoldingsEndpoint, {
                 data: deleteArgs,
                 headers: {
                     'Content-Type': 'application/json',

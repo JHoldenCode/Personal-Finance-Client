@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const postHoldingsEndpoint = "http://localhost:5000/holdings";
+
 const PostHoldingsButton = (props) => {
   const [postData, setPostData] = useState({
     ticker: '',
@@ -19,7 +21,7 @@ const PostHoldingsButton = (props) => {
 
   const handleButtonClick = async () => {
     try {
-      // create JSON object as argument to post request
+      // create JSON object as argument to POST request
       let ticker = postData.ticker;
       let postArgs = {
         "holdings": {
@@ -35,7 +37,7 @@ const PostHoldingsButton = (props) => {
       }
 
       // Make the POST request using axios
-      const response = await axios.post('http://localhost:5000/holdings', postArgs);
+      const response = await axios.post(postHoldingsEndpoint, postArgs);
 
       // reloads the table data after a successful post request
       props.refetchTableData();
@@ -52,6 +54,7 @@ const PostHoldingsButton = (props) => {
   // TODO - fix css of input fields and button
   // TODO - update table automatically when new post
   // TODO - check if stock ticker is valid
+  // TODO - make sure required fields are filled in
 
   return (
     <div>

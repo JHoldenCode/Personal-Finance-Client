@@ -8,6 +8,7 @@ const moneySpentEndpoint = "http://localhost:5000/money_spent/all_purchases";
 
 // TODO - reset selectedRows when items deleted
 // TODO - add id for purchases instead of using row index
+// TODO - implement other endpoints from /money_spent somehow here
 
 function Purchases() {
     const [tableData, setTableData] = useState([]);

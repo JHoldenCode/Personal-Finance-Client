@@ -5,14 +5,14 @@ import Purchases from '../purchases/purchases';
 
 function Dashboard() {
     return (
-      <>
+      <div className='dashboard'>
         <div className='purchases-section'>
           <Purchases />
         </div>
         <div className='holdings-section'>
-          {/* <Holdings /> */}
+          <Holdings />
         </div>
-      </>
+      </div>
     )
 }
 

@@ -1,5 +1,18 @@
 .holdings-section {
-    width: 50%;
-    margin-left: auto;
-    margin-right: 0px;
-  }
+  width: 35%;
+  margin-left: 100px;
+  margin-right: 0px;
+  display: inline-block;
+}
+
+.purchases-section {
+  width: 35%;
+  margin-left: 0;
+  margin-right: 100px;
+  display: inline-block;
+}
+
+.dashboard {
+  text-align: center; /* Optional: Align the sections to the center of the container */
+}
+

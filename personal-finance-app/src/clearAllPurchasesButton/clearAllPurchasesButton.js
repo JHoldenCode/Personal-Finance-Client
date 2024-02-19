@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-const clearAllPurchasesEndpoint = "http://localhost:5000/money_spent/clear_all";
+const clearAllPurchasesEndpoint = "http://localhost:5001/money_spent/clear_all";
 
 const ClearAllPurchasesButton = (props) => {
     const handleButtonClick = async () => {

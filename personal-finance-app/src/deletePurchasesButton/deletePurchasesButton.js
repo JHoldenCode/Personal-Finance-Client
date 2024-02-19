@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-const deletePurchasesEndpoint = "http://localhost:5000/money_spent";
+const deletePurchasesEndpoint = "http://localhost:5001/money_spent";
 
 // creates the object used as an argument to the DELETE request
 const createDeleteRequestObj = (tableData, selectedRows) => {

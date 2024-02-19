@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const postPurchasesEndpoint = "http://localhost:5000/money_spent";
+const postPurchasesEndpoint = "http://localhost:5001/money_spent";
 
 const PostPurchasesButton = (props) => {
     const [postData, setPostData] = useState({

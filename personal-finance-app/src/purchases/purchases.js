@@ -4,7 +4,7 @@ import PostPurchasesButton from '../postPurchasesButton/postPurchasesButton';
 import DeletePurchasesButton from '../deletePurchasesButton/deletePurchasesButton';
 import ClearAllPurchasesButton from '../clearAllPurchasesButton/clearAllPurchasesButton';
 
-const moneySpentEndpoint = "http://localhost:5000/money_spent/all_purchases";
+const moneySpentEndpoint = "http://localhost:5001/money_spent/all_purchases";
 
 // TODO - add id for purchases instead of using row index
 // TODO - implement other endpoints from /money_spent somehow here

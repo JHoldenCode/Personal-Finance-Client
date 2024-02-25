@@ -4,10 +4,10 @@ import PostPurchasesButton from '../postPurchasesButton/postPurchasesButton';
 import DeletePurchasesButton from '../deletePurchasesButton/deletePurchasesButton';
 import ClearAllPurchasesButton from '../clearAllPurchasesButton/clearAllPurchasesButton';
 
-const moneySpentEndpoint = "http://localhost:5001/money_spent/all_purchases";
+const purchasesEndpoint = 'http://localhost:5001/purchases/all';
 
 // TODO - add id for purchases instead of using row index
-// TODO - implement other endpoints from /money_spent somehow here
+// TODO - implement other endpoints from /purchases somehow here
 
 function Purchases() {
     const [tableData, setTableData] = useState([]);
@@ -27,34 +27,29 @@ function Purchases() {
         setSelectedRows([]);
     };
 
+    // returns a promise so that when called prior to resetSelectedRows, the old data is gone
+    // before its checkbox is unchecked
     const fetchTableData = async () => {
-        axios.get(moneySpentEndpoint)
-            .then((response) => {
-                let purchasesData = response.data.purchases;
-                let newData = [];
+        return new Promise((resolve, reject) => {
+            axios.get(purchasesEndpoint)
+                .then((response) => {
+                    let purchasesData = response.data.purchases;
+                    let newData = [];
 
-                // add data from GET request to tableData
-                for (let year in purchasesData) {
-                    let yearData = purchasesData[year];
-                    for (let month in yearData) {
-                        let monthData = yearData[month];
-                        for (let date in monthData) {
-                            let purchases = monthData[date];
-                            for (let index in purchases) {
-                                // add date field into purchase object
-                                let purchaseObj = purchases[index];
-                                purchaseObj.date = date;
-                                newData.push(purchaseObj);
-                            }
-                        }
+                    // add data from GET request to tableData
+                    for (let index in purchasesData) {
+                        let purchase = purchasesData[index]
+                        newData.push(purchase)
                     }
-                }
 
-                setTableData(newData);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+                    setTableData(newData);
+                    resolve(newData);
+                })
+                .catch((error) => {
+                    console.error('Error fetching table data:', error);
+                    reject(error);
+                });
+        });
     };
 
     useEffect(() => {
@@ -70,23 +65,23 @@ function Purchases() {
                             <th>X</th>
                             <th>Date</th>
                             <th>Amount</th>
-                            <th>Item</th>
+                            <th>Memo</th>
                             <th>Category</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {tableData.map((val, key) => (
-                            <tr key={key}>
+                        {tableData.map((val, _) => (
+                            <tr key={val.id}>
                                 <td>
                                     <input 
                                     type="checkbox"
-                                    checked={selectedRows.includes(key)}
-                                    onChange={() => handleCheckboxChange(key)}
+                                    checked={selectedRows.includes(val.id)}
+                                    onChange={() => handleCheckboxChange(val.id)}
                                     />
                                 </td>
                                 <td>{val.date}</td>
                                 <td>{val.amount}</td>
-                                <td>{val.item}</td>
+                                <td>{val.memo}</td>
                                 <td>{val.category}</td>
                             </tr>
                         ))}
@@ -100,7 +95,6 @@ function Purchases() {
             </div>
             <div className='delete-purchases-button'>
                 <DeletePurchasesButton
-                    tableData={tableData}
                     selectedRows={selectedRows}
                     refetchTableData={fetchTableData}
                     resetSelectedRows={resetSelectedRows}

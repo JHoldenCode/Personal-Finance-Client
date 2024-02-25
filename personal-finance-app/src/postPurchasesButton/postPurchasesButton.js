@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const postPurchasesEndpoint = "http://localhost:5001/money_spent";
+const postPurchasesEndpoint = "http://localhost:5001/purchases";
 
 const PostPurchasesButton = (props) => {
     const [postData, setPostData] = useState({
         date: '',
         amount: '',
-        item: '',
+        memo: '',
         category: '',
     });
 
@@ -21,24 +21,20 @@ const PostPurchasesButton = (props) => {
 
     const handleButtonClick = async () => {
         try {
-            // construct date string compatible with API mm/dd/yyyy
-            let [year, month, day] = postData.date.split("-");
+            let newPurchase = {
+                date: postData.date,
+                amount: postData.amount
+            };
+            // memo and category are optional fields, add them only if they have been input into the form
+            if (postData.memo.trim().length > 0) {
+                newPurchase['memo'] = postData.memo;
+            }
+            if (postData.category.trim().length > 0) {
+                newPurchase['category'] = postData.category;
+            }
 
-            // remove leading zeros from day and month
-            day = String(parseInt(day));
-            month = String(parseInt(month));
-
-            let compatible_date = month + '/' + day + '/' + year;
-
-            // create JSON object as argument to post request
             let postArgs = {
-                "purchases": {
-                    [compatible_date]: [{
-                        amount: parseFloat(postData.amount),
-                        item: postData.item,
-                        category: postData.category
-                    }]
-                }
+                "purchases": [newPurchase]
             };
 
             // make the POST request using axios
@@ -50,7 +46,7 @@ const PostPurchasesButton = (props) => {
             // handle the response if needed
             console.log("Response: ", response.data);
         } catch (error) {
-            console.log(error);
+            console.error('Error posting new purchase to the database:', error);
         }
     };
 
@@ -77,11 +73,11 @@ const PostPurchasesButton = (props) => {
             </label>
             <br />
             <label>
-                Item:
+                Memo:
                 <input
                     type="text"
-                    name="item"
-                    value={postData.item}
+                    name="memo"
+                    value={postData.memo}
                     onChange={handleInputChange}
                  />
             </label>

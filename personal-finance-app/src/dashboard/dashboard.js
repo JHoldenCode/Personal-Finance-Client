@@ -10,7 +10,7 @@ function Dashboard() {
           <Purchases />
         </div>
         <div className='holdings-section'>
-          <Holdings />
+          {/* <Holdings /> */}
         </div>
       </div>
     )

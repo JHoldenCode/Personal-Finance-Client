@@ -1,68 +1,69 @@
 .purchases-div {
-    font-family: poppins;
+  font-family: poppins;
 }
 
 .purchases-table {
-    margin: auto;
-    max-width: 65%;
-    padding-bottom: 25px;
+  margin: auto;
+  max-width: 65%;
+  padding-bottom: 25px;
 }
 
 .purchases-table table {
-    width: 100%;
-    table-layout: fixed;
-    height: 40px;
+  width: 100%;
+  table-layout: fixed;
+  height: 40px;
 
-    border-radius: 8px 8px 0 0; /* Rounded corners only for the top of the table */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
-    border-spacing: 0; /* Remove spacing between table cells */
-    background-color: #b0d0f7; /* White background */
-    border: 1px solid #000; /* Add a border */
+  border-radius: 8px 8px 0 0; /* Rounded corners only for the top of the table */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  border-spacing: 0; /* Remove spacing between table cells */
+  background-color: #b0d0f7; /* White background */
+  border: 1px solid #000; /* Add a border */
 }
 
-.purchases-table th, .purchases-table td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd; /* Add bottom border to cells */
+.purchases-table th,
+.purchases-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd; /* Add bottom border to cells */
 }
 
 .purchases-table th:first-child,
 .purchases-table td:first-child {
-    width: 10px; /* Set a specific width for the first column */
+  width: 10px; /* Set a specific width for the first column */
 }
 
 .purchases-table th {
-    background-color: #f5f5f5; /* Light gray background for header */
+  background-color: #f5f5f5; /* Light gray background for header */
 }
 
 .purchases-table th:first-child {
-    border-top-left-radius: 8px; /* Rounded top-left corner for the first th */
+  border-top-left-radius: 8px; /* Rounded top-left corner for the first th */
 }
-  
+
 .purchases-table th:last-child {
-    border-top-right-radius: 8px; /* Rounded top-right corner for the last th */
+  border-top-right-radius: 8px; /* Rounded top-right corner for the last th */
 }
 
 .purchases-table tbody tr {
-    height: 25px;
+  height: 25px;
 }
 
 .purchases-table tbody tr:nth-child(even) {
-    background-color: #6e8dd5; /* Alternate row background color */
+  background-color: #6e8dd5; /* Alternate row background color */
 }
 
 .purchases-header {
-    display: flex;
+  display: flex;
 }
 
 .left-header {
-    flex: 1;
-    margin-left: 20px;
-    margin-bottom: 20px;
+  flex: 1;
+  margin-left: 20px;
+  margin-bottom: 20px;
 }
 
 .right-header {
-    flex: 2;
-    margin-top: 25px;
-    margin-bottom: 15px;
+  flex: 2;
+  margin-top: 25px;
+  margin-bottom: 15px;
 }

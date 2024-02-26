@@ -1,7 +1,7 @@
 .dashboard {
   display: flex;
   background-color: #cccccc; /* Light gray color */
-  height: 100vh;  /* sets background color to cover height of viewport */
+  height: 100vh; /* sets background color to cover height of viewport */
   overflow: auto; /* covers everything when extra content extends screen down */
 }
 

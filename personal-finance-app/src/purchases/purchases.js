@@ -30,27 +30,24 @@ function Purchases() {
     // returns a promise so that when called prior to resetSelectedRows, the old data is gone
     // before its checkbox is unchecked
     const fetchTableData = async () => {
-        return new Promise((resolve, reject) => {
-            axios.get(purchasesEndpoint)
-                .then((response) => {
-                    let purchasesData = response.data.purchases;
-                    let newData = [];
+        try {
+            const response = await axios.get(purchasesEndpoint);
+            let purchasesData = response.data.purchases;
+            let newData = [];
 
-                    // add data from GET request to tableData
-                    for (let index in purchasesData) {
-                        let purchase = purchasesData[index]
-                        newData.push(purchase)
-                    }
+            // add data from GET request to tableData
+            for (let index in purchasesData) {
+                let purchase = purchasesData[index]
+                newData.push(purchase)
+            }
 
-                    setTableData(newData);
-                    resolve(newData);
-                })
-                .catch((error) => {
-                    console.error('Error fetching table data:', error);
-                    reject(error);
-                });
-        });
-    };
+            setTableData(newData);
+            return newData;
+        } catch (error) {
+            console.error('Error fetching purchases table data:', error);
+            throw(error);
+        }
+    }; 
 
     useEffect(() => {
         fetchTableData();

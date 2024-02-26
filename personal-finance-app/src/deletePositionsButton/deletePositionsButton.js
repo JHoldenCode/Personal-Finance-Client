@@ -1,18 +1,18 @@
 import React from 'react';
 import axios from 'axios';
 
-const deleteHoldingsEndpoint = "http://localhost:5000/holdings";
+const deletePositionsEndpoint = "http://localhost:5000/positions";
 
-const DeleteHoldingsButton = (props) => {
+const DeletePositionsButton = (props) => {
     const handleButtonClick = async () => {
         try {
             // create JSON obj for delete request
             let deleteArgs = {
-                "holdings": props.selectedTickers
+                "positions": props.selectedTickers
             };
 
             // make the DELETE request using axios
-            const response = await axios.delete(deleteHoldingsEndpoint, {
+            const response = await axios.delete(deletePositionsEndpoint, {
                 data: deleteArgs,
                 headers: {
                     'Content-Type': 'application/json',
@@ -20,20 +20,21 @@ const DeleteHoldingsButton = (props) => {
             });
 
             // reloads the table data after a successful delete request
-            props.refetchTableData();
+            await props.refetchTableData();
+            props.resetSelectedRows();
 
             // handle the response if needed
             console.log('Response: ', response.data);
         } catch (error) {
-            console.log(error);
+            console.error('Error deleting selected positions:', error);
         }
     };
 
     return (
         <div>
-            <button onClick={handleButtonClick}>Delete Selected Holdings</button>
+            <button onClick={handleButtonClick}>Delete Selected Positions</button>
         </div>
     )
 };
 
-export default DeleteHoldingsButton;
+export default DeletePositionsButton;

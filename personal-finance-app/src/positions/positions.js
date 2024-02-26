@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import PostHoldingsButton from '../postHoldingsButton/postHoldingsButton';
-import DeleteHoldingsButton from '../deleteHoldingsButton/deleteHoldingsButton';
-import ClearAllHoldingsButton from '../clearAllHoldingsButton/clearAllHoldingsButton';
-import './holdings.css';
+import PostPositionsButton from '../postPositionsButton/postPositionsButton';
+import DeletePositionsButton from '../deletePositionsButton/deletePositionsButton';
+import ClearAllPositionsButton from '../clearAllPositionsButton/clearAllPositionsButton';
+import './positions.css';
 
-const holdingsEndpoint = "http://localhost:5000/holdings";
+const positionsEndpoint = "http://localhost:5000/positions";
 
-function Holdings() {
+function Positions() {
   const [tableData, setTableData] = useState([]);
   const [compiledData, setCompiledData] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
@@ -23,25 +23,31 @@ function Holdings() {
     });
   };
 
+  const resetSelectedRows = () => {
+    setSelectedRows([]);
+  };
+
+  // returns a promise so that when called prior to resetSelectedRows, the old data is gone
+  // before its checkbox is unchecked
   const fetchTableData = async () => {
-    axios.get(holdingsEndpoint)
-      .then((response) => {
-        let holdingsData = response.data.holdings;
-        let newData = [];
+    try {
+      const response = await axios.get(positionsEndpoint);
+      let positionsData = response.data.positions;
+      let newData = [];
 
-        // add the ticker for reach stock as a field in the object and push to newData
-        for (let stockTicker in holdingsData) {
-          let holdingsObj = holdingsData[stockTicker];
-          holdingsObj.ticker = stockTicker;
-          newData.push(holdingsObj);
-        }
+      // add the ticker for reach stock as a field in the object and push to newData
+      for (let stockTicker in positionsData) {
+        let positionsObj = positionsData[stockTicker];
+        positionsObj.ticker = stockTicker;
+        newData.push(positionsObj);
+      }
 
-        setTableData(newData);
-        setCompiledData(response.data.compiled_stats);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      setTableData(newData);
+      setCompiledData(response.data.compiled_stats);
+    } catch (error) {
+      console.error('Error fetching positions table data.', error);
+      throw(error);
+    }
   };
 
   useEffect(() => {
@@ -100,20 +106,22 @@ function Holdings() {
           </tbody>
         </table>
       </div>
-      <div className='post-new-holding'>
-        <PostHoldingsButton 
+      <div className='post-new-position'>
+        <PostPositionsButton 
             refetchTableData={fetchTableData}
         />
       </div>
-      <div className='delete-holdings'>
-        <DeleteHoldingsButton 
+      <div className='delete-positions'>
+        <DeletePositionsButton 
             selectedTickers={selectedRows}
             refetchTableData={fetchTableData}
+            resetSelectedRows={resetSelectedRows}
         />
       </div>
-      <div className='clear-all-holdings'>
-        <ClearAllHoldingsButton 
+      <div className='clear-all-positions'>
+        <ClearAllPositionsButton 
           refetchTableData={fetchTableData}
+          resetSelectedRows={resetSelectedRows}
         />
       </div>
     </div>
@@ -124,4 +132,4 @@ function Holdings() {
 // TODO - fix rounding on compiled stats
 // TODO - minify code
 
-export default Holdings;
+export default Positions;

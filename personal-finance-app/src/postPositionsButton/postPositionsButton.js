@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const postHoldingsEndpoint = "http://localhost:5000/holdings";
+const postPositionsEndpoint = "http://localhost:5000/positions";
 
-const PostHoldingsButton = (props) => {
+const PostPositionsButton = (props) => {
   const [postData, setPostData] = useState({
     ticker: '',
     stockPrice: '',
@@ -24,7 +24,7 @@ const PostHoldingsButton = (props) => {
       // create JSON object as argument to POST request
       let ticker = postData.ticker;
       let postArgs = {
-        "holdings": {
+        "positions": {
             [ticker]: {
                 shares: parseFloat(postData.shares),
                 cost_basis: parseFloat(postData.costBasis)
@@ -33,11 +33,11 @@ const PostHoldingsButton = (props) => {
       };
       // stock price is optional to submit
       if (postData.stockPrice.length > 0) {
-        postArgs.holdings[ticker].price = parseFloat(postData.stockPrice);
+        postArgs.positions[ticker].price = parseFloat(postData.stockPrice);
       }
 
       // Make the POST request using axios
-      const response = await axios.post(postHoldingsEndpoint, postArgs);
+      const response = await axios.post(postPositionsEndpoint, postArgs);
 
       // reloads the table data after a successful post request
       props.refetchTableData();
@@ -103,4 +103,4 @@ const PostHoldingsButton = (props) => {
   );
 };
 
-export default PostHoldingsButton;
+export default PostPositionsButton;

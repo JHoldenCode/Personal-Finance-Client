@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PostPositionsButton from "../postPositionsButton/postPositionsButton";
 import DeletePositionsButton from "../deletePositionsButton/deletePositionsButton";
-import ClearAllPositionsButton from '../clearAllPositionsButton/clearAllPositionsButton';
-import './positions.css';
+import ClearAllPositionsButton from "../clearAllPositionsButton/clearAllPositionsButton";
+import "./positions.css";
 
 const positionsEndpoint = "http://localhost:5000/positions";
 

@@ -33,7 +33,7 @@ const PostPositionsButton = (props) => {
         }
       };
       // stock price is optional to submit
-      if (postData.stockPrice.length > 0) {
+      if (postData.stockPrice.trim().length > 0) {
         postArgs.positions[ticker].price = parseFloat(postData.stockPrice);
       }
 
@@ -60,8 +60,8 @@ const PostPositionsButton = (props) => {
   };
 
   // TODO - make it so there is no up down arrows on input fields
+      // TODO - use numeric, but must check in handleInputChange function to not allow rogue input
   // TODO - fix css of input fields and button
-  // TODO - update table automatically when new post
   // TODO - check if stock ticker is valid
   // TODO - make sure required fields are filled in
 
@@ -81,7 +81,8 @@ const PostPositionsButton = (props) => {
       <label>
         Stock Price (Optional):
         <input
-          type="number"
+          type="numeric"
+          pattern="[0-9]*[.,]?[0-9]+"
           name="stockPrice"
           placeholder='i.e. 23.90'
           value={postData.stockPrice}

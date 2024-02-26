@@ -39,6 +39,8 @@ function Purchases() {
             // add data from GET request to tableData
             for (let index in purchasesData) {
                 let purchase = purchasesData[index]
+                // round value to 2 decimal places
+                purchase.amount = Math.round(purchase.amount * 100) / 100
                 newData.push(purchase)
             }
 

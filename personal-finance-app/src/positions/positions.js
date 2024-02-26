@@ -7,6 +7,10 @@ import './positions.css';
 
 const positionsEndpoint = "http://localhost:5000/positions";
 
+function roundToTwoDecimalPlaces(val) {
+  return Math.round(val * 100) / 100;
+}
+
 function Positions() {
   const [tableData, setTableData] = useState([]);
   const [compiledData, setCompiledData] = useState([]);
@@ -38,6 +42,13 @@ function Positions() {
       // add the ticker for reach stock as a field in the object and push to newData
       for (let stockTicker in positionsData) {
         let positionsObj = positionsData[stockTicker];
+
+        
+        // round all values to 2 decimal places
+        for (let key in positionsObj) {
+          positionsObj[key] = roundToTwoDecimalPlaces(positionsObj[key]);
+        }
+
         positionsObj.ticker = stockTicker;
         newData.push(positionsObj);
       }
@@ -130,7 +141,6 @@ function Positions() {
 }
 
 // TODO - add prettier and linting in CI?
-// TODO - fix rounding on all displayed values
 // TODO - minify code
 
 export default Positions;

@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './postPositionsButton.css';
+import React, { useState } from "react";
+import axios from "axios";
+import "./postPositionsButton.css";
 
 const postPositionsEndpoint = "http://localhost:5000/positions";
 
 const PostPositionsButton = (props) => {
   const [postData, setPostData] = useState({
-    ticker: '',
-    stockPrice: '',
-    shares: '',
-    costBasis: '',
+    ticker: "",
+    stockPrice: "",
+    shares: "",
+    costBasis: "",
   });
 
   const handleInputChange = (e) => {
@@ -25,12 +25,12 @@ const PostPositionsButton = (props) => {
       // create JSON object as argument to POST request
       let ticker = postData.ticker;
       let postArgs = {
-        "positions": {
-            [ticker]: {
-                shares: parseFloat(postData.shares),
-                cost_basis: parseFloat(postData.costBasis)
-            }
-        }
+        positions: {
+          [ticker]: {
+            shares: parseFloat(postData.shares),
+            cost_basis: parseFloat(postData.costBasis),
+          },
+        },
       };
       // stock price is optional to submit
       if (postData.stockPrice.trim().length > 0) {
@@ -45,34 +45,34 @@ const PostPositionsButton = (props) => {
 
       // reset input fields after successful POST to database
       setPostData({
-        ticker: '',
-        stockPrice: '',
-        shares: '',
-        costBasis: '',
+        ticker: "",
+        stockPrice: "",
+        shares: "",
+        costBasis: "",
       });
 
       // Handle the response if needed
-      console.log('Response:', response.data);
+      console.log("Response:", response.data);
     } catch (error) {
       // Handle errors
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
   // TODO - make it so there is no up down arrows on input fields
-      // TODO - use numeric, but must check in handleInputChange function to not allow rogue input
+  // TODO - use numeric, but must check in handleInputChange function to not allow rogue input
   // TODO - fix css of input fields and button
   // TODO - check if stock ticker is valid
   // TODO - make sure required fields are filled in
 
   return (
-    <div className='post-positions-form'>
-        <label>
+    <div className="post-positions-form">
+      <label>
         Stock Ticker:
         <input
           type="text"
           name="ticker"
-          placeholder='i.e. AAPL'
+          placeholder="i.e. AAPL"
           value={postData.ticker}
           onChange={handleInputChange}
         />
@@ -84,7 +84,7 @@ const PostPositionsButton = (props) => {
           type="numeric"
           pattern="[0-9]*[.,]?[0-9]+"
           name="stockPrice"
-          placeholder='i.e. 23.90'
+          placeholder="i.e. 23.90"
           value={postData.stockPrice}
           onChange={handleInputChange}
         />
@@ -95,7 +95,7 @@ const PostPositionsButton = (props) => {
         <input
           type="number"
           name="shares"
-          placeholder='i.e. 5.5'
+          placeholder="i.e. 5.5"
           value={postData.shares}
           onChange={handleInputChange}
         />
@@ -106,7 +106,7 @@ const PostPositionsButton = (props) => {
         <input
           type="number"
           name="costBasis"
-          placeholder='i.e. 22.85'
+          placeholder="i.e. 22.85"
           value={postData.costBasis}
           onChange={handleInputChange}
         />

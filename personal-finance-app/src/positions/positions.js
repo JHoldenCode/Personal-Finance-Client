@@ -31,6 +31,12 @@ function Positions() {
     setSelectedRows([]);
   };
 
+  // do some random stuff here to test prettier
+  let json_json = {'amount': 3, "style": "cats"   };
+  for (let key in json_json) {
+    console.log(json_json[key]);
+  }
+
   // returns a promise so that when called prior to resetSelectedRows, the old data is gone
   // before its checkbox is unchecked
   const fetchTableData = async () => {

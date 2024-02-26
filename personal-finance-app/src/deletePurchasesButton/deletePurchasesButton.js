@@ -1,7 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import './deletePurchasesButton.css'
 
 const deletePurchasesEndpoint = "http://localhost:5001/purchases";
+
+// TODO - maybe make separate styling file for tables and buttons
 
 const DeletePurchasesButton = (props) => {
     const handleButtonClick = async () => {
@@ -31,7 +34,7 @@ const DeletePurchasesButton = (props) => {
     };
 
     return (
-        <div>
+        <div className='delete-purchases-button'>
             <button onClick={handleButtonClick}>Delete Selected Purchases</button>
         </div>
     )

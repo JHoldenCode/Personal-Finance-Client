@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import './clearAllPurchasesButton.css';
 
 const clearAllPurchasesEndpoint = "http://localhost:5001/purchases/clear_all";
 
@@ -20,7 +21,7 @@ const ClearAllPurchasesButton = (props) => {
     }
 
     return (
-        <div>
+        <div className='clear-all-purchases-button'>
             <button onClick={handleButtonClick}>Delete All Purchases</button>
         </div>
     )

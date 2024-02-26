@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import './deletePositionsButton.css';
 
 const deletePositionsEndpoint = "http://localhost:5000/positions";
 
@@ -31,7 +32,7 @@ const DeletePositionsButton = (props) => {
     };
 
     return (
-        <div>
+        <div className='delete-positions-button'>
             <button onClick={handleButtonClick}>Delete Selected Positions</button>
         </div>
     )

@@ -7,7 +7,7 @@ function Dashboard() {
     return (
       <div className='dashboard'>
         <div className='purchases-section'>
-          {/* <Purchases /> */}
+          <Purchases />
         </div>
         <div className='holdings-section'>
           <Positions />

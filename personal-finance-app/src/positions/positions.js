@@ -7,6 +7,10 @@ import './positions.css';
 
 const positionsEndpoint = "http://localhost:5000/positions";
 
+function roundToTwoDecimalPlaces(val) {
+  return Math.round(val * 100) / 100;
+}
+
 function Positions() {
   const [tableData, setTableData] = useState([]);
   const [compiledData, setCompiledData] = useState([]);
@@ -38,6 +42,13 @@ function Positions() {
       // add the ticker for reach stock as a field in the object and push to newData
       for (let stockTicker in positionsData) {
         let positionsObj = positionsData[stockTicker];
+
+        
+        // round all values to 2 decimal places
+        for (let key in positionsObj) {
+          positionsObj[key] = roundToTwoDecimalPlaces(positionsObj[key]);
+        }
+
         positionsObj.ticker = stockTicker;
         newData.push(positionsObj);
       }
@@ -55,22 +66,41 @@ function Positions() {
   }, []); // Empty dependency array to run the effect only once when the component mounts
 
   return (
-    <div>
-      <div className="compiled-stock-results">
-        <div>
-          <label>Total Equity</label>
-          <span>{compiledData.total_equity}</span>
+    <div className='positions-div'>
+      <div className='positions-header'>
+        <div className='left-header'>
+          <h1>POSITIONS</h1>
+          <DeletePositionsButton 
+            selectedTickers={selectedRows}
+            refetchTableData={fetchTableData}
+            resetSelectedRows={resetSelectedRows}
+          />
+          <ClearAllPositionsButton 
+            refetchTableData={fetchTableData}
+            resetSelectedRows={resetSelectedRows}
+          />
+          <div className='compiled-stock-results'>
+            <div className='compiled-line'>
+              <label>Total Equity:</label>
+              <span>{compiledData.total_equity}</span>
+            </div>
+            <div className='compiled-line'>
+              <label>Total Dollar Gain:</label>
+              <span>{compiledData.total_dollar_gain}</span>
+            </div>
+            <div className='compiled-line'>
+              <label>Total Percent Gain:</label>
+              <span>{compiledData.total_percent_gain}</span>
+            </div>
+          </div>
         </div>
-        <div>
-          <label>Total Dollar Gain</label>
-          <span>{compiledData.total_dollar_gain}</span>
-        </div>
-        <div>
-          <label>Total Percent Gain</label>
-          <span>{compiledData.total_percent_gain}</span>
+        <div className='right-header'>
+          <PostPositionsButton 
+            refetchTableData={fetchTableData}
+          />
         </div>
       </div>
-      <div className="stock-table">
+      <div className='positions-table'>
         <table>
           <thead>
             <tr>
@@ -106,30 +136,11 @@ function Positions() {
           </tbody>
         </table>
       </div>
-      <div className='post-new-position'>
-        <PostPositionsButton 
-            refetchTableData={fetchTableData}
-        />
-      </div>
-      <div className='delete-positions'>
-        <DeletePositionsButton 
-            selectedTickers={selectedRows}
-            refetchTableData={fetchTableData}
-            resetSelectedRows={resetSelectedRows}
-        />
-      </div>
-      <div className='clear-all-positions'>
-        <ClearAllPositionsButton 
-          refetchTableData={fetchTableData}
-          resetSelectedRows={resetSelectedRows}
-        />
-      </div>
     </div>
   );
 }
 
 // TODO - add prettier and linting in CI?
-// TODO - fix rounding on compiled stats
 // TODO - minify code
 
 export default Positions;

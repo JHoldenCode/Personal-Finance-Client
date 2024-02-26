@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import './clearAllPositionsButton.css';
 
 const clearAllPositionsEndpoint = "http://localhost:5000/positions/clear_all";
 
@@ -19,7 +20,7 @@ const ClearAllPositionsButton = (props) => {
     };
 
     return (
-        <div>
+        <div className='clear-all-positions-button'>
             <button onClick={handleButtonClick}>Delete All Positions</button>
         </div>
     );

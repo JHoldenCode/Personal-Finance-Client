@@ -1,9 +1,9 @@
-.post-positions-form button {
+.post-purchases-form button {
     font-family: poppins;
     margin-top: 5px;
 }
 
-.post-positions-form {
+.post-purchases-form {
     text-align: left;
     font-family: poppins;
     padding: 15px;
@@ -15,11 +15,11 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
 }
 
-.post-positions-form label {
+.post-purchases-form label {
     font-weight: bold;
 }
 
-.post-positions-form input {
+.post-purchases-form input {
     width: 100%;
     margin-bottom: 5px;
     box-sizing: border-box;
@@ -29,7 +29,7 @@
     height: 20px;
 }
   
-.post-positions-form button {
+.post-purchases-form button {
     background-color: #5de67f; /* Red color, adjust as needed */
     color: #fff; /* White text color */
     padding: 5px 10px; /* Adjust padding for your preferred size */
@@ -40,6 +40,6 @@
     transition: background-color 0.3s ease; /* Add a smooth transition effect */
 }
   
-.post-positions-form button:hover {
+.post-purchases-form button:hover {
     background-color: #32c143; /* Darker red color on hover */
 }

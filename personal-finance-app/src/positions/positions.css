@@ -1,41 +1,110 @@
-.stock-table {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.positions-div {
+  font-family: poppins;
 }
- 
-table {
-    border: 2px solid forestgreen;
-    width: 600px;
-    height: 200px;
+
+.positions-table {
+  margin: auto;
+  max-width: 65%;
+  padding-bottom: 25px;
 }
- 
-th {
-    border-bottom: 1px solid black;
+
+.positions-table table {
+  width: 100%;
+  table-layout: fixed;
+  height: 40px;
+
+  border-radius: 8px 8px 0 0; /* Rounded corners only for the top of the table */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  border-spacing: 0; /* Remove spacing between table cells */
+  background-color: #b0d0f7; /* White background */
+  border: 1px solid #000; /* Add a border */
 }
- 
-td {
-    text-align: center;
+
+.positions-table th, .positions-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd; /* Add bottom border to cells */
+}
+
+.positions-table th:first-child,
+.positions-table td:first-child {
+  width: 10px; /* Set a specific width for the first column */
+}
+
+.positions-table th {
+  background-color: #f5f5f5; /* Light gray background for header */
+}
+
+.positions-table th:first-child {
+  border-top-left-radius: 8px; /* Rounded top-left corner for the first th */
+}
+
+.positions-table th:last-child {
+  border-top-right-radius: 8px; /* Rounded top-right corner for the last th */
+}
+
+.positions-table tbody tr {
+  height: 25px;
+}
+
+.positions-table tbody tr:nth-child(even) {
+  background-color: #6e8dd5; /* Alternate row background color */
+}
+
+.positions-header {
+  display: flex;
+}
+
+.left-header {
+  flex: 1;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.right-header {
+  flex: 2;
+  margin-top: 25px;
+  margin-bottom: 15px;
 }
 
 .compiled-stock-results {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .compiled-stock-results > div {
-    display: flex;
-    flex-direction: row;
-    margin: 18px;
-  }
-  
-  .compiled-stock-results label {
-    margin-right: 8px;
-  }
-  
-  .compiled-stock-results span {
-    font-weight: bold; /* Optional: Make values bold */
-  }
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  padding: 4px;
+  border: 1px solid #ddd; /* Add a border */
+  border-radius: 5px; /* Add rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+.compiled-stock-results div {
+  margin-bottom: 5px;
+}
+
+.compiled-stock-results label {
+  font-weight: bold; /* Add bold font-weight to labels */
+  font-size: 15px;
+  margin-right: 10px;
+}
+
+.compiled-stock-results span {
+  font-size: 16px; /* Adjust font size as needed */
+  color: #333; /* Adjust text color */
+  font-weight: bold;
+}
+
+.compiled-stock-results label {
+  color: #2224b0;
+}
+
+.compiled-line {
+  display: flex;
+}
+
+.compiled-line span {
+  flex: 1;
+}
+
+.compiled-line label {
+  flex: 1;
+}

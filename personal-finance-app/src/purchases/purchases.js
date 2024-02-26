@@ -3,11 +3,12 @@ import axios from 'axios';
 import PostPurchasesButton from '../postPurchasesButton/postPurchasesButton';
 import DeletePurchasesButton from '../deletePurchasesButton/deletePurchasesButton';
 import ClearAllPurchasesButton from '../clearAllPurchasesButton/clearAllPurchasesButton';
+import './purchases.css';
 
 const purchasesEndpoint = 'http://localhost:5001/purchases/all';
 
-// TODO - add id for purchases instead of using row index
 // TODO - implement other endpoints from /purchases somehow here
+// TODO - if table has no data, maybe add a row that says, "Table Empty"
 
 function Purchases() {
     const [tableData, setTableData] = useState([]);
@@ -38,6 +39,8 @@ function Purchases() {
             // add data from GET request to tableData
             for (let index in purchasesData) {
                 let purchase = purchasesData[index]
+                // round value to 2 decimal places
+                purchase.amount = Math.round(purchase.amount * 100) / 100
                 newData.push(purchase)
             }
 
@@ -54,7 +57,26 @@ function Purchases() {
     }, []); // Empty dependency array to run the effect only once when the component mounts
 
     return (
-        <div>
+        <div className='purchases-div'>
+            <div className='purchases-header'>
+                <div className='left-header'>
+                    <h1>PURCHASES</h1>
+                    <DeletePurchasesButton
+                        selectedRows={selectedRows}
+                        refetchTableData={fetchTableData}
+                        resetSelectedRows={resetSelectedRows}
+                    />
+                    <ClearAllPurchasesButton 
+                        refetchTableData={fetchTableData}
+                        resetSelectedRows={resetSelectedRows}
+                    />
+                </div>
+                <div className='right-header'>
+                    <PostPurchasesButton 
+                        refetchTableData={fetchTableData}
+                    />
+                </div>
+            </div>
             <div className='purchases-table'>
                 <table>
                     <thead>
@@ -84,24 +106,6 @@ function Purchases() {
                         ))}
                     </tbody>
                 </table>
-            </div>
-            <div className='post-purchases-button'>
-                <PostPurchasesButton 
-                    refetchTableData={fetchTableData}
-                />
-            </div>
-            <div className='delete-purchases-button'>
-                <DeletePurchasesButton
-                    selectedRows={selectedRows}
-                    refetchTableData={fetchTableData}
-                    resetSelectedRows={resetSelectedRows}
-                />
-            </div>
-            <div className='clear-all-purchases'>
-                <ClearAllPurchasesButton 
-                    refetchTableData={fetchTableData}
-                    resetSelectedRows={resetSelectedRows}
-                />
             </div>
         </div>
     )

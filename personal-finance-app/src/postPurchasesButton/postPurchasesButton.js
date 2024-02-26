@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './postPurchasesButton.css'
 
 const postPurchasesEndpoint = "http://localhost:5001/purchases";
 
@@ -41,7 +42,15 @@ const PostPurchasesButton = (props) => {
             const response = await axios.post(postPurchasesEndpoint, postArgs);
 
             // reloads the table data after a successful POST request
-            props.refetchTableData();
+            await props.refetchTableData();
+
+            // reset data in input boxes after a successful post
+            setPostData({
+                date: '',
+                amount: '',
+                memo: '',
+                category: '',
+            });
 
             // handle the response if needed
             console.log("Response: ", response.data);
@@ -51,7 +60,7 @@ const PostPurchasesButton = (props) => {
     };
 
     return (
-        <div>
+        <div className='post-purchases-form'>
             <label>
                 Date:
                 <input 
@@ -67,26 +76,29 @@ const PostPurchasesButton = (props) => {
                 <input 
                     type="number"
                     name="amount"
+                    placeholder="i.e. 20.99"
                     value={postData.amount}
                     onChange={handleInputChange}
                 />
             </label>
             <br />
             <label>
-                Memo:
+                Memo (Optional):
                 <input
                     type="text"
                     name="memo"
+                    placeholder='i.e. Groceries'
                     value={postData.memo}
                     onChange={handleInputChange}
                  />
             </label>
             <br />
             <label>
-                Category:
+                Category (Optional):
                 <input
                     type="text"
                     name="category"
+                    placeholder='i.e. Necessity'
                     value={postData.category}
                     onChange={handleInputChange}
                  />

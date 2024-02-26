@@ -1,18 +1,14 @@
-.holdings-section {
-  width: 35%;
-  margin-left: 100px;
-  margin-right: 0px;
-  display: inline-block;
+.dashboard {
+  display: flex;
+  background-color: #cccccc; /* Light gray color */
+  height: 100vh;  /* sets background color to cover height of viewport */
+  overflow: auto; /* covers everything when extra content extends screen down */
 }
 
 .purchases-section {
-  width: 35%;
-  margin-left: 0;
-  margin-right: 100px;
-  display: inline-block;
+  flex: 1; /* Takes up 50% of the available space */
 }
 
-.dashboard {
-  text-align: center; /* Optional: Align the sections to the center of the container */
+.holdings-section {
+  flex: 1; /* Takes up 50% of the available space */
 }
-

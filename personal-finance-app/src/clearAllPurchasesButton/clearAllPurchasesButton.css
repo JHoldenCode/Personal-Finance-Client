@@ -1,13 +1,13 @@
-.delete-positions-button button {
+.clear-all-purchases-button button {
     font-family: poppins;
 }
 
-.delete-positions-button {
+.clear-all-purchases-button {
     text-align: left;
     padding-bottom: 5px;
 }
   
-.delete-positions-button button {
+.clear-all-purchases-button button {
     background-color: #ff5c5c; /* Red color, adjust as needed */
     color: #fff; /* White text color */
     padding: 5px 10px; /* Adjust padding for your preferred size */
@@ -18,6 +18,6 @@
     transition: background-color 0.3s ease; /* Add a smooth transition effect */
 }
   
-.delete-positions-button button:hover {
+.clear-all-purchases-button button:hover {
     background-color: #f41c1c; /* Darker red color on hover */
 }

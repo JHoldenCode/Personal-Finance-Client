@@ -53,8 +53,14 @@ function Positions() {
         newData.push(positionsObj);
       }
 
+      // round compiled data
+      let compiledDataResponse = response.data.compiled_stats;
+      for (let key in compiledDataResponse) {
+        compiledDataResponse[key] = roundToTwoDecimalPlaces(compiledDataResponse[key]);
+      }
+
       setTableData(newData);
-      setCompiledData(response.data.compiled_stats);
+      setCompiledData(compiledDataResponse);
     } catch (error) {
       console.error('Error fetching positions table data.', error);
       throw(error);

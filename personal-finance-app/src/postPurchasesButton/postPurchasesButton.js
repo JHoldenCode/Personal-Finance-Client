@@ -83,7 +83,7 @@ const PostPurchasesButton = (props) => {
             </label>
             <br />
             <label>
-                Memo:
+                Memo (Optional):
                 <input
                     type="text"
                     name="memo"
@@ -94,7 +94,7 @@ const PostPurchasesButton = (props) => {
             </label>
             <br />
             <label>
-                Category:
+                Category (Optional):
                 <input
                     type="text"
                     name="category"

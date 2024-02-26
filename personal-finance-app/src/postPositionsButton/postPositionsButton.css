@@ -1,0 +1,45 @@
+.post-positions-form button {
+    font-family: poppins;
+    margin-top: 5px;
+}
+
+.post-positions-form {
+    text-align: left;
+    font-family: poppins;
+    padding: 15px;
+    margin-left: 45px;
+
+    max-width: 250px; /* Adjust the maximum width of the form */
+    border: 1px solid #ddd; /* Add a border */
+    border-radius: 5px; /* Add rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+.post-positions-form label {
+    font-weight: bold;
+}
+
+.post-positions-form input {
+    width: 100%;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ccc; /* Add a border to inputs */
+    border-radius: 3px; /* Add rounded corners to inputs */
+
+    height: 20px;
+}
+  
+.post-positions-form button {
+    background-color: #5de67f; /* Red color, adjust as needed */
+    color: #fff; /* White text color */
+    padding: 5px 10px; /* Adjust padding for your preferred size */
+    font-size: 14px; /* Adjust font size as needed */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add a smooth transition effect */
+}
+  
+.post-positions-form button:hover {
+    background-color: #32c143; /* Darker red color on hover */
+}

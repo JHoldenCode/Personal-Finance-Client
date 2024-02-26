@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './postPositionsButton.css';
 
 const postPositionsEndpoint = "http://localhost:5000/positions";
 
@@ -40,7 +41,15 @@ const PostPositionsButton = (props) => {
       const response = await axios.post(postPositionsEndpoint, postArgs);
 
       // reloads the table data after a successful post request
-      props.refetchTableData();
+      await props.refetchTableData();
+
+      // reset input fields after successful POST to database
+      setPostData({
+        ticker: '',
+        stockPrice: '',
+        shares: '',
+        costBasis: '',
+      });
 
       // Handle the response if needed
       console.log('Response:', response.data);
@@ -57,12 +66,13 @@ const PostPositionsButton = (props) => {
   // TODO - make sure required fields are filled in
 
   return (
-    <div>
+    <div className='post-positions-form'>
         <label>
         Stock Ticker:
         <input
           type="text"
           name="ticker"
+          placeholder='i.e. AAPL'
           value={postData.ticker}
           onChange={handleInputChange}
         />
@@ -73,6 +83,7 @@ const PostPositionsButton = (props) => {
         <input
           type="number"
           name="stockPrice"
+          placeholder='i.e. 23.90'
           value={postData.stockPrice}
           onChange={handleInputChange}
         />
@@ -83,6 +94,7 @@ const PostPositionsButton = (props) => {
         <input
           type="number"
           name="shares"
+          placeholder='i.e. 5.5'
           value={postData.shares}
           onChange={handleInputChange}
         />
@@ -93,6 +105,7 @@ const PostPositionsButton = (props) => {
         <input
           type="number"
           name="costBasis"
+          placeholder='i.e. 22.85'
           value={postData.costBasis}
           onChange={handleInputChange}
         />

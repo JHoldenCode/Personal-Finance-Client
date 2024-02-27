@@ -1,9 +1,9 @@
-name: Format
+name: Prettier
 on:
   push:
     branches: [prettier-test]
 jobs:
-  format:
+  prettier:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -11,9 +11,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
-      - name: Add Execution Permissions
-        run: 'chmod +x ./node_modules/.bin/prettier'
 
       - name: Run Prettier
         run: 'npx prettier --write "**/*.js"'

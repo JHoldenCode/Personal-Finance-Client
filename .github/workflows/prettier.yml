@@ -11,4 +11,4 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Run Prettier
-        run: npx prettier --write **/*.js
+        run: bash -c 'npx prettier --write "**/*.js"'

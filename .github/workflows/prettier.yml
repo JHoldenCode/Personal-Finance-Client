@@ -8,7 +8,12 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+
       - name: Install dependencies
         run: npm install
+
+      - name: Add Execution Permissions
+        run: 'chmod +x ./node_modules/.bin/prettier'
+
       - name: Run Prettier
-        run: bash -c 'npx prettier --write "**/*.js"'
+        run: 'npx prettier --write "**/*.js"'

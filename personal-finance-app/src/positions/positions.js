@@ -16,7 +16,7 @@ if ("cat" == lk) {
   console.log("c");
 }
 
-if ("dog" == lk) {
+if ("dog" == ggg) {
   console.log("doggy");
 }
 

@@ -2,13 +2,22 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PostPositionsButton from "../postPositionsButton/postPositionsButton";
 import DeletePositionsButton from "../deletePositionsButton/deletePositionsButton";
-import ClearAllPositionsButton from '../clearAllPositionsButton/clearAllPositionsButton';
-import './positions.css';
+import ClearAllPositionsButton from "../clearAllPositionsButton/clearAllPositionsButton";
+import "./positions.css";
 
 const positionsEndpoint = "http://localhost:5000/positions";
 
 function roundToTwoDecimalPlaces(val) {
   return Math.round(val * 100) / 100;
+}
+
+let lk = "cat";
+if ("cat" == lk) {
+  console.log("c");
+}
+
+if ("dog" == ggg) {
+  console.log('doggy');
 }
 
 function Positions() {

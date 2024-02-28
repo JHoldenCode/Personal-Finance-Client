@@ -25,6 +25,8 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
+          git config --local user.email "JohnHoldenCode@gmail.com"
+          git config --local user.name "JHoldenCode"
           git commit -m "Apply Prettier formatting"
           git push
         working-directory: ${{ github.workspace }}

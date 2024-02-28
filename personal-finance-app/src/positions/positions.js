@@ -17,7 +17,7 @@ if ("cat" == lk) {
 }
 
 if ("dog" == ggg) {
-  console.log("doggy");
+  console.log('doggy');
 }
 
 function Positions() {

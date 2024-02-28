@@ -4,7 +4,6 @@ import PostPositionsButton from "../postPositionsButton/postPositionsButton";
 import DeletePositionsButton from "../deletePositionsButton/deletePositionsButton";
 import ClearAllPositionsButton from '../clearAllPositionsButton/clearAllPositionsButton';
 import './positions.css';
-//
 
 const positionsEndpoint = "http://localhost:5000/positions";
 

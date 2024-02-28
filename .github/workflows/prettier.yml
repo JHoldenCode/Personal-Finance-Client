@@ -8,12 +8,15 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+        working-directory: ${{ github.workspace }}
 
       - name: Install dependencies
         run: npm install
+        working-directory: ${{ github.workspace }}
 
       - name: Add Execution Permissions
         run: 'chmod +x ./node_modules/.bin/prettier'
+        working-directory: ${{ github.workspace }}
 
       - name: Run Prettier
         run: 'npx prettier --write "**/*.js"'

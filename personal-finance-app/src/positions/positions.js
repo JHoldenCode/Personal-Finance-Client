@@ -11,6 +11,8 @@ function roundToTwoDecimalPlaces(val) {
   return Math.round(val * 100) / 100;
 }
 
+// branch protection test
+
 function Positions() {
   const [tableData, setTableData] = useState([]);
   const [compiledData, setCompiledData] = useState([]);

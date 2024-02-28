@@ -12,4 +12,4 @@ module.exports = {
   rules: {
     // Your ESLint rules go here
   },
-};
+}

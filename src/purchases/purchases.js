@@ -1,65 +1,65 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import PostPurchasesButton from "../postPurchasesButton/postPurchasesButton";
-import DeletePurchasesButton from "../deletePurchasesButton/deletePurchasesButton";
-import ClearAllPurchasesButton from "../clearAllPurchasesButton/clearAllPurchasesButton";
-import "./purchases.css";
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import PostPurchasesButton from '../postPurchasesButton/postPurchasesButton'
+import DeletePurchasesButton from '../deletePurchasesButton/deletePurchasesButton'
+import ClearAllPurchasesButton from '../clearAllPurchasesButton/clearAllPurchasesButton'
+import './purchases.css'
 
-const purchasesEndpoint = "http://localhost:5001/purchases/all";
+const purchasesEndpoint = 'http://localhost:5001/purchases/all'
 
 // TODO - implement other endpoints from /purchases somehow here
 // TODO - if table has no data, maybe add a row that says, "Table Empty"
 
 function Purchases() {
-  const [tableData, setTableData] = useState([]);
-  const [selectedRows, setSelectedRows] = useState([]);
+  const [tableData, setTableData] = useState([])
+  const [selectedRows, setSelectedRows] = useState([])
 
   const handleCheckboxChange = (rowKey) => {
     setSelectedRows((prevSelectedRows) => {
       if (prevSelectedRows.includes(rowKey)) {
-        return prevSelectedRows.filter((selectedRow) => selectedRow !== rowKey);
+        return prevSelectedRows.filter((selectedRow) => selectedRow !== rowKey)
       } else {
-        return [...prevSelectedRows, rowKey];
+        return [...prevSelectedRows, rowKey]
       }
-    });
-  };
+    })
+  }
 
   const resetSelectedRows = () => {
-    setSelectedRows([]);
-  };
+    setSelectedRows([])
+  }
 
   // returns a promise so that when called prior to resetSelectedRows, the old data is gone
   // before its checkbox is unchecked
   const fetchTableData = async () => {
     try {
-      const response = await axios.get(purchasesEndpoint);
-      let purchasesData = response.data.purchases;
-      let newData = [];
+      const response = await axios.get(purchasesEndpoint)
+      let purchasesData = response.data.purchases
+      let newData = []
 
       // add data from GET request to tableData
       for (let index in purchasesData) {
-        let purchase = purchasesData[index];
+        let purchase = purchasesData[index]
         // round value to 2 decimal places
-        purchase.amount = Math.round(purchase.amount * 100) / 100;
-        newData.push(purchase);
+        purchase.amount = Math.round(purchase.amount * 100) / 100
+        newData.push(purchase)
       }
 
-      setTableData(newData);
-      return newData;
+      setTableData(newData)
+      return newData
     } catch (error) {
-      console.error("Error fetching purchases table data:", error);
-      throw error;
+      console.error('Error fetching purchases table data:', error)
+      throw error
     }
-  };
+  }
 
   useEffect(() => {
-    fetchTableData();
-  }, []); // Empty dependency array to run the effect only once when the component mounts
+    fetchTableData()
+  }, []) // Empty dependency array to run the effect only once when the component mounts
 
   return (
-    <div className="purchases-div">
-      <div className="purchases-header">
-        <div className="left-header">
+    <div className='purchases-div'>
+      <div className='purchases-header'>
+        <div className='left-header'>
           <h1>PURCHASES</h1>
           <DeletePurchasesButton
             selectedRows={selectedRows}
@@ -71,11 +71,11 @@ function Purchases() {
             resetSelectedRows={resetSelectedRows}
           />
         </div>
-        <div className="right-header">
+        <div className='right-header'>
           <PostPurchasesButton refetchTableData={fetchTableData} />
         </div>
       </div>
-      <div className="purchases-table">
+      <div className='purchases-table'>
         <table>
           <thead>
             <tr>
@@ -91,7 +91,7 @@ function Purchases() {
               <tr key={val.id}>
                 <td>
                   <input
-                    type="checkbox"
+                    type='checkbox'
                     checked={selectedRows.includes(val.id)}
                     onChange={() => handleCheckboxChange(val.id)}
                   />
@@ -106,7 +106,7 @@ function Purchases() {
         </table>
       </div>
     </div>
-  );
+  )
 }
 
-export default Purchases;
+export default Purchases

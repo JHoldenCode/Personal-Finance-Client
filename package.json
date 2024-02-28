@@ -20,7 +20,6 @@
     "eject": "react-scripts eject",
     "lint": "eslint . --max-warnings=0 && prettier --check .",
     "lint-fix": "eslint . --fix && prettier --write ."
-    
   },
   "eslintConfig": {
     "extends": [

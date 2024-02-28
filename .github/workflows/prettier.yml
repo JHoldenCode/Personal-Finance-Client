@@ -17,3 +17,14 @@ jobs:
 
       - name: Run Prettier
         run: 'npx prettier --write "**/*.js"'
+        working-directory: ${{ github.workspace }}
+
+      - name: Stage Changes
+        run: git add .
+        working-directory: ${{ github.workspace }}
+
+      - name: Commit and Push Changes
+        run: |
+          git commit -m "Apply Prettier formatting"
+          git push
+        working-directory: ${{ github.workspace }}

@@ -5,7 +5,7 @@ import DeletePositionsButton from "../deletePositionsButton/deletePositionsButto
 import ClearAllPositionsButton from '../clearAllPositionsButton/clearAllPositionsButton';
 import './positions.css';
 
-const positionsEndpoint = "http://localhost:5000/positions";
+const positionsEndpoint = 'http://localhost:5000/positions';
 
 function roundToTwoDecimalPlaces(val) {
   return Math.round(val * 100) / 100;
